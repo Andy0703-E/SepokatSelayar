@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMKM Sepokat Selayar Lumpia Alpukat</title>
+    <!-- Tambahkan CSS dan JS Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: 600;
+    }
+
+    p,
+    a,
+    li {
+        font-weight: 400;
+    }
+</style>
+
+<body class="bg-gradient-to-b from-green-50 to-green-100 text-gray-800">
+    <!-- Navbar -->
+    <nav class="bg-green-500 text-white p-4 fixed top-0 w-full shadow-md z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Sepokat Selayar</h1>
+            <!-- Tombol Hamburger untuk Mobile -->
+            <button id="menu-toggle" class="block md:hidden focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Menu -->
+            <ul id="menu" class="hidden md:flex space-x-4">
+                <li><a href="#beranda" class="hover:text-gray-200">Beranda</a></li>
+                <li><a href="#menu" class="hover:text-gray-200">Menu</a></li>
+                <li><a href="#alamat" class="hover:text-gray-200">Alamat</a></li>
+                <li><a href="#kontak" class="hover:text-gray-200">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Sidebar untuk Mobile -->
+    <div id="sidebar" class="fixed inset-0 bg-green-500 bg-opacity-90 z-40 hidden">
+        <div class="flex justify-end p-4">
+            <button id="close-sidebar" class="text-white text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul class="flex flex-col items-center space-y-6">
+            <li><a href="#beranda" class="text-white text-2xl hover:text-gray-200">Beranda</a></li>
+            <li><a href="#menu" class="text-white text-2xl hover:text-gray-200">Menu</a></li>
+            <li><a href="#alamat" class="text-white text-2xl hover:text-gray-200">Alamat</a></li>
+            <li><a href="#kontak" class="text-white text-2xl hover:text-gray-200">Kontak</a></li>
+        </ul>
+    </div>
+
+    <!-- Script Toggle Menu -->
+    <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const menu = document.getElementById("menu");
+        const sidebar = document.getElementById("sidebar");
+        const closeSidebar = document.getElementById("close-sidebar");
+
+        // Toggle Navbar menu
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+        });
+
+        // Close Sidebar when clicking on close button
+        closeSidebar.addEventListener("click", () => {
+            sidebar.classList.add("hidden");
+        });
+
+        // Optional: Close sidebar when clicking outside of it
+        sidebar.addEventListener("click", (event) => {
+            if (event.target === sidebar) {
+                sidebar.classList.add("hidden");
+            }
+        });
+    </script>
+
+
+    <!-- Beranda -->
+    <section id="beranda"
+        class="h-screen bg-gradient-to-br from-green-200 to-green-400 text-white text-center flex flex-col justify-center items-center px-4">
+        <h2 class="text-4xl md:text-5xl font-semibold mb-4">Selamat Datang di Sepokat Selayar</h2>
+        <p class="text-xl md:text-2xl">Lumpia alpukat segar dan nikmat khas Selayar.</p>
+    </section>
+
+    <!-- Menu -->
+    <section id="menu" class="h-screen bg-gradient-to-bl from-green-100 to-green-300 py-8 flex flex-col justify-center">
+        <div class="container mx-auto">
+            <h2 class="text-2xl font-bold text-center mb-6">Daftar Menu</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <!-- Item Menu -->
+                <div class="bg-white border-2 border-green-300 rounded-lg shadow-lg p-4 text-center">
+                    <img src="./1.jpg" alt="Lumpia Alpukat Original"
+                        class="h-40 w-40 object-cover mx-auto mb-4 rounded-md">
+                    <h3 class="text-xl font-semibold text-green-700">Smoothies Alpukat Keju</h3>
+                    <p class="text-gray-700">Harga: Rp18.000</p>
+                </div>
+                <div class="bg-white border-2 border-green-300 rounded-lg shadow-lg p-4 text-center">
+                    <img src="./2.jpg" alt="Lumpia Alpukat Keju" class="h-40 w-40 object-cover mx-auto mb-4 rounded-md">
+                    <h3 class="text-xl font-semibold text-green-700">Chocolate Smoothies</h3>
+                    <p class="text-gray-700">Harga: Rp16.000</p>
+                </div>
+                <div class="bg-white border-2 border-green-300 rounded-lg shadow-lg p-4 text-center">
+                    <img src="./3.jpg" alt="Lumpia Alpukat Cokelat"
+                        class="h-40 w-40 object-cover mx-auto mb-4 rounded-md">
+                    <h3 class="text-xl font-semibold text-green-700">Mango Smoothies</h3>
+                    <p class="text-gray-700">Harga: Rp16.000</p>
+                </div>
+                <div class="bg-white border-2 border-green-300 rounded-lg shadow-lg p-4 text-center">
+                    <img src="./4.jpg" alt="Lumpia Alpukat Cokelat"
+                        class="h-40 w-40 object-cover mx-auto mb-4 rounded-md">
+                    <h3 class="text-xl font-semibold text-green-700">Smoothies Strawberry</h3>
+                    <p class="text-gray-700">Harga: Rp18.000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Alamat -->
+    <section id="alamat" class="py-16 bg-gradient-to-br from-green-100 to-green-200">
+        <div class="text-center px-4">
+            <h2 class="text-3xl font-bold text-green-700 mb-4">Alamat UMKM</h2>
+            <p class="text-lg text-gray-700">Jalan Poros Selayar, Kecamatan Bontosikuyu, Selayar</p>
+        </div>
+        <div id="map" class="w-full h-64 mt-4 rounded-lg shadow-md"></div>
+    </section>
+
+    <!-- Kontak -->
+    <section id="kontak" class="py-16 bg-gradient-to-b from-green-50 to-green-500 text-white">
+        <div class="text-center px-4">
+            <h2 class="text-3xl font-bold mb-4">Kontak Kami</h2>
+            <p>Ikuti kami di Instagram:</p>
+            <a href="https://www.instagram.com/sepokatofficial/" class="font-semibold text-gray-500" target="_blank"
+                class="hover:underline flex items-center justify-center gap-2">
+                <i class="fab fa-instagram"></i> @sepokatofficial
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-600 text-white font-semibold text-center py-4">
+        <p>&copy; 2024 Sepokat Selayar Lumpia Alpukat. All Rights Reserved.</p>
+    </footer>
+</body>
+
+
+<!-- Script untuk Map -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const map = L.map("map").setView([-6.114831, 120.458773], 18);
+
+        const umkmData = {
+            name: "Sepokat Selayar",
+            rating: "5.0",
+            reviews: 1,
+            category: "Kedai Minuman",
+            buka: "Buka · Tutup pukul 22.04 🔻",
+            alamat: "",
+            phone: "---",
+            coords: [-6.114831, 120.458773]
+        };
+
+        const marker = L.marker(umkmData.coords).addTo(map);
+
+        // Menambahkan tooltip permanen pada marker
+        marker.bindTooltip(umkmData.name, {
+            permanent: true,
+            direction: "top",
+            className: "marker-tooltip",
+        });
+
+        marker.bindPopup(`
+                <div class="popup-container">
+                    <div class="popup-header">${umkmData.name}</div>
+                    <div class="popup-rating">⭐ ${umkmData.rating} <span>(${umkmData.reviews})</span></div>
+                    <div class="popup-category">${umkmData.category}</div>
+                    <div class="popup-address"><i class="fas fa-map-marker-alt"></i> ${umkmData.alamat}</div>
+                    <div class="popup-hours"><i class="fas fa-clock"></i> <span>${umkmData.buka}</span></div>
+                    <div class="popup-contact"><i class="fas fa-phone-alt"></i> ${umkmData.phone}</div>
+                </div>
+            `);
+
+        fetch("./jalanBentengAnjay.geojson")
+            .then((response) => response.json())
+            .then((geojsonData) => {
+                L.geoJSON(geojsonData, {
+                    style: {
+                        color: "#f0f0f0",
+                        weight: 3,
+                        opacity: 1,
+                    },
+                }).addTo(map);
+            })
+            .catch((error) =>
+                console.error("Error loading jalan GeoJSON:", error)
+            );
+
+        fetch("./kecamatanBenteng.geojson")
+            .then((response) => response.json())
+            .then((geojsonData) => {
+                L.geoJSON(geojsonData, {
+                    style: {
+                        color: "#333",
+                        weight: 1.5,
+                        opacity: 0.8,
+                        fillColor: "#4d5",
+                        fillOpacity: 1,
+                    },
+                }).addTo(map);
+            })
+            .catch((error) =>
+                console.error("Error loading kecamatanBenteng GeoJSON:", error)
+            );
+    });
+</script>
+</body>
+
+</html>
