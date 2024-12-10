@@ -190,11 +190,6 @@
             loadGeoJSON(file.url, file.style);
         });
 
-        // Menambahkan kontrol layer (opsional)
-        const baseMaps = {
-            "OpenStreetMap": L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-        };
-
         const overlayMaps = {
             "UMKM Marker": marker
         };
